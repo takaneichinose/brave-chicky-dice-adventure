@@ -14,10 +14,12 @@ There are 4 possible commands to fight the ghost defending the Natural Tower.
 
 By rolling the dice, you can guide Chicky with the possible commands depends on the number appeared on the dice.
 
-- == 1 Do nothing
-- >= 2 Defend
-- >= 3 Defend, Attack
-- >= 5 Defend, Attack, Heal
+```
+== 1 Do nothing
+>= 2 Defend
+>= 3 Defend, Attack
+>= 5 Defend, Attack, Heal
+```
 
 Also, you may challenge your friends and brag your highest score.
 
