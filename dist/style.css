@@ -1,0 +1,193 @@
+@import url("https://fonts.googleapis.com/css2?family=Press+Start+2P");
+body {
+  font-family: "Press Start 2P", cursive;
+  font-size: 16px;
+}
+
+.container {
+  background-image: url("https://assets.codepen.io/430361/chicky-dice-bg.png");
+  background-size: cover;
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+  image-rendering: pixelated;
+}
+
+.hud, .game-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.hud {
+  color: #fff1e8;
+  width: 100vw;
+  height: 100vh;
+}
+
+.life {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  user-select: none;
+  z-index: 2;
+}
+
+.enemy-life {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  user-select: none;
+  z-index: 2;
+}
+
+.floor {
+  position: absolute;
+  top: 2.5rem;
+  left: 1rem;
+  user-select: none;
+  z-index: 2;
+}
+
+.command {
+  color: #fff1e8;
+  background-color: #000000;
+  width: 60vw;
+  padding: 0.5rem 0;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  z-index: 2;
+  position: absolute;
+  top: 50%;
+  left: 20vw;
+  transform: translateY(-50%);
+  animation: fade-in 512ms ease-out;
+}
+.command.selected {
+  animation: fade-out 512ms ease-out;
+}
+
+.command-item {
+  color: #fff1e8;
+  text-decoration: none;
+  padding: 0.5rem 1rem 0.5rem 2rem;
+  display: block;
+  position: relative;
+  user-select: none;
+}
+.command-item.disabled {
+  color: #5f574f;
+}
+.command-item:hover:not(.disabled)::before, .command-item.selected::before {
+  content: "";
+  width: 0;
+  height: 0;
+  border-top: solid 0.5rem transparent;
+  border-bottom: solid 0.5rem transparent;
+  border-left: solid 0.9rem #fff1e8;
+  position: absolute;
+  top: 50%;
+  left: 0.5rem;
+  transform: translateY(-50%);
+}
+
+.dice-area {
+  background-color: #000000;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 3;
+  animation: fade-in 512ms ease-out;
+}
+.dice-area.hidden {
+  animation: fade-out 512ms ease-out;
+}
+
+.fade {
+  background-color: #000000;
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 4;
+}
+.fade.fade-in {
+  animation: fade-in 512ms ease-out;
+}
+.fade.fade-out {
+  animation: fade-out 512ms ease-out;
+}
+
+.dice {
+  --number: 0vmin;
+  --rotation: 0deg;
+  background-image: url("https://assets.codepen.io/430361/chicky-dice-game.png");
+  background-position: var(--number) 0;
+  background-size: 300vmin 50vmin;
+  width: 50vmin;
+  height: 50vmin;
+  image-rendering: pixelated;
+  transform: rotateZ(var(--rotation));
+}
+
+.effect {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  user-select: none;
+  z-index: 1;
+  animation: fade-in 512ms ease-out, fade-out 512ms ease-out 768ms;
+}
+
+.effect-image {
+  background-image: var(--image-url);
+  background-size: 50vmin 50vmin;
+  width: 50vmin;
+  height: 50vmin;
+  image-rendering: pixelated;
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes fade-out {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@media screen and (min-width: 526px) {
+  .container {
+    background-size: contain;
+  }
+}
+@media screen and (min-width: 961px) {
+  .command {
+    flex-direction: row;
+  }
+
+  .command-item {
+    width: 50%;
+  }
+}
