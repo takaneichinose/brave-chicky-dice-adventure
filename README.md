@@ -2,6 +2,8 @@
 
 A Pen created on CodePen.io. Original URL: [https://codepen.io/takaneichinose/pen/dympyjN](https://codepen.io/takaneichinose/pen/dympyjN).
 
+<img width="1440" alt="スクリーンショット 2022-07-15 0 22 06" src="https://user-images.githubusercontent.com/11864841/179163515-c37ab398-971b-4b24-bc08-ffacbaa70de2.png">
+
 ## Description
 
 This is just a simple turn-based game where you just have to throw a dice, defeat the enemy, and go to the highest floor as you can.
