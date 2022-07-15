@@ -2,8 +2,6 @@
 
 A Pen created on CodePen.io. Original URL: [https://codepen.io/takaneichinose/pen/dympyjN](https://codepen.io/takaneichinose/pen/dympyjN).
 
-# Brave Chicky Dice Adventure
-
 ## Description
 
 This is just a simple turn-based game where you just have to throw a dice, defeat the enemy, and go to the highest floor as you can.
