@@ -1,0 +1,5 @@
+node_modules
+.eslintrc.cjs
+postcss.config.cjs
+tailwind.config.cjs
+vite.config.cjs
