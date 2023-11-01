@@ -5,8 +5,9 @@ import * as CameraSettings from '../Constants/CameraSettings';
 import * as LightingSettings from '../Constants/LightingSettings';
 import * as RendererSettings from '../Constants/RendererSettings';
 
-import { getScreenRatio } from '../Utils/Screen';
-import { addModel } from '../Utils/Models';
+import { getScreenRatio } from './Screen';
+import { addModel } from './Models';
+import { emit } from './Events';
 
 const scene: THREE.Scene = new THREE.Scene();
 const camera: THREE.PerspectiveCamera = new THREE.PerspectiveCamera(
@@ -117,17 +118,48 @@ function update(): void {
 }
 
 /**
+ * Preload all the assets in the list
+ * @param {string[]} assets List of assets
+ */
+async function preload(assets: string[]): Promise<void> {
+  emit('start', {
+    detail: {
+      count: assets.length,
+    },
+  });
+
+  let index = 0;
+
+  for (const asset of assets) {
+    await addModel(asset);
+
+    index++;
+
+    emit('progress', {
+      detail: {
+        loaded: index,
+      },
+    });
+  }
+
+  emit('finished', {
+    detail: {
+      count: assets.length,
+    },
+  });
+}
+
+/**
  * Initialize the game
  * @param {string} canvasId ID attribute of the canvas element
+ * @param {string[]} assets List of assets
  */
 export async function initialize(
   canvasId: string,
   assets?: string[],
 ): Promise<void> {
   if (assets != null) {
-    for (const asset of assets) {
-      await addModel(asset);
-    }
+    await preload(assets);
   }
 
   createCanvas(canvasId);

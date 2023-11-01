@@ -1,5 +1,6 @@
 import { initialize } from './Classes/Game';
+import { models } from './Constants/Assets';
 
 import './style.css';
 
-initialize('brave-chicky-dice-adventure');
+void initialize('brave-chicky-dice-adventure', models);
