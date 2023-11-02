@@ -2,6 +2,11 @@ import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
 import * as CameraSettings from '../Constants/CameraSettings';
+import {
+  finishedEventName,
+  progressEventName,
+  startEventName,
+} from '../Constants/Events';
 import * as LightingSettings from '../Constants/LightingSettings';
 import * as RendererSettings from '../Constants/RendererSettings';
 
@@ -117,12 +122,13 @@ function update(): void {
   render();
 }
 
+// TODO: Put this function into another class
 /**
  * Preload all the assets in the list
  * @param {string[]} assets List of assets
  */
 async function preload(assets: string[]): Promise<void> {
-  emit('start', {
+  emit(startEventName, {
     detail: {
       count: assets.length,
     },
@@ -135,18 +141,30 @@ async function preload(assets: string[]): Promise<void> {
 
     index++;
 
-    emit('progress', {
+    emit(progressEventName, {
       detail: {
         loaded: index,
       },
     });
   }
 
-  emit('finished', {
+  emit(finishedEventName, {
     detail: {
       count: assets.length,
     },
   });
+}
+
+/**
+ * Resize the canvas
+ */
+export function resize() {
+  const container: HTMLElement = canvas.parentElement as HTMLElement;
+
+  camera.aspect = container.clientWidth / container.clientHeight;
+  camera.updateProjectionMatrix();
+
+  renderer.setSize(container.clientWidth, container.clientHeight);
 }
 
 /**

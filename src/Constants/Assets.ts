@@ -6,6 +6,8 @@ export const models: string[] = [
   `${assetsPath}/Bush.gltf`,
   `${assetsPath}/Chicky.gltf`,
   `${assetsPath}/Ghost.gltf`,
+  `${assetsPath}/Grass.gltf`,
+  `${assetsPath}/Stage.gltf`,
   `${assetsPath}/Stone.gltf`,
   `${assetsPath}/Tree.gltf`,
   `${assetsPath}/Tree2.gltf`,
