@@ -1,8 +1,8 @@
 // Path of the assets
 export const assetsPath = '/assets/models';
 
-// List of models
-export const models: Record<string, string>[] = [
+// List of assets
+export const assets: Record<string, string>[] = [
   {
     name: 'Bush',
     path: `${assetsPath}/Bush.gltf`,

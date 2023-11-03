@@ -8,6 +8,7 @@ import {
   createControls,
   createLighting,
   createRenderer,
+  initializeCamera,
   renderer,
 } from './Create';
 import { update } from './Update';
@@ -42,6 +43,8 @@ export function resize() {
 export async function initialize(
   canvasId: string,
   assets?: Record<string, string>[],
+  createCallback?: () => void,
+  updateCallback?: (delta: number) => void,
 ): Promise<void> {
   if (assets != null) {
     await preload(assets);
@@ -52,5 +55,11 @@ export async function initialize(
   createRenderer();
   createLighting();
 
-  update();
+  if (createCallback != null) {
+    createCallback();
+  }
+
+  initializeCamera();
+
+  update(updateCallback);
 }

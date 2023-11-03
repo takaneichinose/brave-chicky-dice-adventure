@@ -1,22 +1,29 @@
 import { camera, clock, controls, renderer, scene } from './Create';
 
+export let delta: number;
+
 /**
  * Render the ThreeJS instance into the canvas
  */
-export function render(): void {
+function render(): void {
   renderer.render(scene, camera);
 }
 
 /**
  * Update function for the animation and game loop
  */
-export function update(): void {
-  requestAnimationFrame(update);
+export function update(updateCallback?: (delta: number) => void): void {
+  requestAnimationFrame(() => {
+    update(updateCallback);
+  });
 
-  const delta: number = clock.getDelta();
+  delta = clock.getDelta();
 
   controls.update();
-  console.log(delta);
 
   render();
+
+  if (updateCallback != null) {
+    updateCallback(delta);
+  }
 }

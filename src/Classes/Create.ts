@@ -92,3 +92,10 @@ export function createCanvas(canvasId: string): void {
 
   canvas = tmpCanvas;
 }
+
+/**
+ * Initialize the position of the camera
+ */
+export function initializeCamera(): void {
+  camera.position.z = CameraSettings.position.z;
+}

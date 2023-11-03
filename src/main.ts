@@ -9,12 +9,22 @@ import {
   StartEventDetail,
 } from './Types/Events';
 
-import { initialize } from './Classes/Game';
-import { models } from './Constants/Assets';
+import { initialize, models } from './Classes/Game';
+import { assets } from './Constants/Assets';
 
 import './style.css';
+import { scene } from './Classes/Create';
 
-void initialize('brave-chicky-dice-adventure', models);
+void initialize('brave-chicky-dice-adventure', assets, create, update);
+
+function create(): void {
+  console.log(models);
+  scene.add(models.Chicky);
+}
+
+function update(delta: number): void {
+  console.log(delta);
+}
 
 window.addEventListener(startEventName, (event: Event | StartEventDetail) => {
   const { detail } = event as StartEventDetail;
