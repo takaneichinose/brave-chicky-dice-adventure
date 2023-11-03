@@ -2,103 +2,51 @@ import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
 import * as CameraSettings from '../Constants/CameraSettings';
-import {
-  finishedEventName,
-  progressEventName,
-  startEventName,
-} from '../Constants/Events';
-import * as LightingSettings from '../Constants/LightingSettings';
-import * as RendererSettings from '../Constants/RendererSettings';
 
 import { getScreenRatio } from './Screen';
-import { addModel } from './Models';
-import { emit } from './Events';
+import { preload } from './Preload';
+import {
+  createCanvas,
+  createControls,
+  createLighting,
+  createRenderer,
+} from './Create';
 
-const scene: THREE.Scene = new THREE.Scene();
-const camera: THREE.PerspectiveCamera = new THREE.PerspectiveCamera(
+export const scene: THREE.Scene = new THREE.Scene();
+export const camera: THREE.PerspectiveCamera = new THREE.PerspectiveCamera(
   CameraSettings.FOV as number,
   getScreenRatio(),
   CameraSettings.near,
   CameraSettings.far,
 );
-const clock: THREE.Clock = new THREE.Clock();
+export const clock: THREE.Clock = new THREE.Clock();
 
-let canvas: HTMLCanvasElement;
-let controls: OrbitControls;
-let renderer: THREE.WebGLRenderer;
+export let canvas: HTMLCanvasElement;
+export let controls: OrbitControls;
+export let renderer: THREE.WebGLRenderer;
 
-// TODO: Delete the ambient light. I might not need this anymore
 /**
- * This will add the lighting to the scene
+ * Set the canvas value
+ * @param {HTMLCanvasElement} value Value of the canvas
  */
-function createLighting(): void {
-  const { color: ambientColor, intensity: ambientIntensity } =
-    LightingSettings.Ambient;
-  const {
-    color: directionalColor,
-    intensity: directionalIntensity,
-    x: directionalX,
-    y: directionalY,
-    z: directionalZ,
-    castShadow,
-    Shadow,
-  } = LightingSettings.Directional;
-
-  const ambientLight = new THREE.AmbientLight(ambientColor, ambientIntensity);
-  const directionalLight = new THREE.DirectionalLight(
-    directionalColor,
-    directionalIntensity,
-  );
-
-  directionalLight.position.set(directionalX, directionalY, directionalZ);
-  directionalLight.castShadow = castShadow;
-  directionalLight.shadow.camera.near = Shadow.Camera.near;
-  directionalLight.shadow.camera.far = Shadow.Camera.far;
-  directionalLight.shadow.bias = Shadow.bias;
-
-  scene.add(ambientLight);
-  scene.add(directionalLight);
-  scene.add(directionalLight.target);
+export function setCanvas(value: HTMLCanvasElement): void {
+  canvas = value;
 }
 
 /**
- * This will set the value of the renderer
+ * Set the renderer value
+ * @param {THREE.WebGLRenderer} value Value of the renderer
  */
-function createRenderer(): void {
-  renderer = new THREE.WebGLRenderer({
-    canvas: canvas,
-    antialias: RendererSettings.antialias,
-    alpha: RendererSettings.alpha,
-  });
-
-  renderer.setPixelRatio(window.devicePixelRatio);
-  renderer.setSize(window.innerWidth, window.innerHeight);
-
-  renderer.shadowMap.enabled = RendererSettings.ShadowMap.enabled;
-  renderer.shadowMap.type = RendererSettings.ShadowMap.type;
+export function setRenderer(value: THREE.WebGLRenderer): void {
+  renderer = value;
 }
 
 /**
- * Create the orbit controls
+ * Set the orbit controls value
+ * @param {OrbitControls} value Value of the renderer
  */
-function createControls(): void {
-  controls = new OrbitControls(camera, canvas);
-}
-
-/**
- * Create the canvas element
- * @param {string} canvasId ID attribute of the canvas element
- */
-function createCanvas(canvasId: string): void {
-  const tmpCanvas: HTMLCanvasElement | null = document.getElementById(
-    canvasId,
-  ) as HTMLCanvasElement | null;
-
-  if (tmpCanvas == null) {
-    throw new Error(`Canvas ${canvasId} is not existing`);
-  }
-
-  canvas = tmpCanvas;
+export function setControls(value: OrbitControls): void {
+  controls = value;
 }
 
 /**
@@ -122,39 +70,6 @@ function update(): void {
   render();
 }
 
-// TODO: Put this function into another class
-/**
- * Preload all the assets in the list
- * @param {string[]} assets List of assets
- */
-async function preload(assets: string[]): Promise<void> {
-  emit(startEventName, {
-    detail: {
-      count: assets.length,
-    },
-  });
-
-  let index = 0;
-
-  for (const asset of assets) {
-    await addModel(asset);
-
-    index++;
-
-    emit(progressEventName, {
-      detail: {
-        loaded: index,
-      },
-    });
-  }
-
-  emit(finishedEventName, {
-    detail: {
-      count: assets.length,
-    },
-  });
-}
-
 /**
  * Resize the canvas
  */
@@ -170,11 +85,11 @@ export function resize() {
 /**
  * Initialize the game
  * @param {string} canvasId ID attribute of the canvas element
- * @param {string[]} assets List of assets
+ * @param {Record<string,string>[]} assets List of assets
  */
 export async function initialize(
   canvasId: string,
-  assets?: string[],
+  assets?: Record<string, string>[],
 ): Promise<void> {
   if (assets != null) {
     await preload(assets);
