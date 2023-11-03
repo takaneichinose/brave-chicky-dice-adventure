@@ -1,11 +1,4 @@
 /**
- * Details of the custom event
- */
-export interface EventDetail {
-  detail: Record<string, unknown>;
-}
-
-/**
  * Preloading started
  */
 export interface StartEventDetail {

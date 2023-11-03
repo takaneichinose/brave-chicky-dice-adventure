@@ -1,19 +1,25 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
+import * as CameraSettings from '../Constants/CameraSettings';
 import * as LightingSettings from '../Constants/LightingSettings';
 import * as RendererSettings from '../Constants/RendererSettings';
-import {
-  camera,
-  canvas,
-  renderer,
-  scene,
-  setCanvas,
-  setControls,
-  setRenderer,
-} from './Game';
 
-// TODO: Delete the ambient light. I might not need this anymore
+import { getScreenRatio } from './Screen';
+
+export const scene: THREE.Scene = new THREE.Scene();
+export const camera: THREE.PerspectiveCamera = new THREE.PerspectiveCamera(
+  CameraSettings.FOV as number,
+  getScreenRatio(),
+  CameraSettings.near,
+  CameraSettings.far,
+);
+export const clock: THREE.Clock = new THREE.Clock();
+
+export let canvas: HTMLCanvasElement;
+export let controls: OrbitControls;
+export let renderer: THREE.WebGLRenderer;
+
 /**
  * This will add the lighting to the scene
  */
@@ -51,13 +57,11 @@ export function createLighting(): void {
  * This will set the value of the renderer
  */
 export function createRenderer(): void {
-  setRenderer(
-    new THREE.WebGLRenderer({
-      canvas: canvas,
-      antialias: RendererSettings.antialias,
-      alpha: RendererSettings.alpha,
-    }),
-  );
+  renderer = new THREE.WebGLRenderer({
+    canvas: canvas,
+    antialias: RendererSettings.antialias,
+    alpha: RendererSettings.alpha,
+  });
 
   renderer.setPixelRatio(window.devicePixelRatio);
   renderer.setSize(window.innerWidth, window.innerHeight);
@@ -70,7 +74,7 @@ export function createRenderer(): void {
  * Create the orbit controls
  */
 export function createControls(): void {
-  setControls(new OrbitControls(camera, canvas));
+  controls = new OrbitControls(camera, canvas);
 }
 
 /**
@@ -83,8 +87,8 @@ export function createCanvas(canvasId: string): void {
   ) as HTMLCanvasElement | null;
 
   if (tmpCanvas == null) {
-    throw new Error(`Canvas ${canvasId} is not existing`);
+    throw new Error(`Canvas "${canvasId}" does not exist`);
   }
 
-  setCanvas(tmpCanvas);
+  canvas = tmpCanvas;
 }

@@ -1,3 +1,5 @@
+import * as THREE from 'three';
+
 import {
   finishedEventName,
   progressEventName,
@@ -5,6 +7,7 @@ import {
 } from '../Constants/Events';
 
 import { emit } from './Events';
+import { setModels } from './Game';
 import { loadModel } from './Models';
 
 /**
@@ -12,6 +15,8 @@ import { loadModel } from './Models';
  * @param {Record<string,string>[]} assets List of assets
  */
 export async function preload(assets: Record<string, string>[]): Promise<void> {
+  const models: Record<string, THREE.Group> = {};
+
   emit(startEventName, {
     count: assets.length,
   });
@@ -19,7 +24,7 @@ export async function preload(assets: Record<string, string>[]): Promise<void> {
   let index = 0;
 
   for (const asset of assets) {
-    await loadModel(asset.path);
+    models[asset.name] = await loadModel(asset.path);
 
     index++;
 
@@ -27,6 +32,8 @@ export async function preload(assets: Record<string, string>[]): Promise<void> {
       loaded: index,
     });
   }
+
+  setModels(models);
 
   emit(finishedEventName, {
     count: assets.length,
