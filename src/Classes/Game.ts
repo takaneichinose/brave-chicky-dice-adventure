@@ -1,11 +1,10 @@
-import * as THREE from 'three';
+import { ModelData } from '../Types/Models';
 
 import { preload } from './Preload';
 import {
   camera,
   canvas,
   createCanvas,
-  createControls,
   createLighting,
   createRenderer,
   initializeCamera,
@@ -13,13 +12,13 @@ import {
 } from './Create';
 import { update } from './Update';
 
-export let models: Record<string, THREE.Group>;
+export let models: Record<string, ModelData>;
 
 /**
  * Set the models value
  * @param {Record<string, THREE.Group>} value Value of the renderer
  */
-export function setModels(value: Record<string, THREE.Group>): void {
+export function setModels(value: Record<string, ModelData>): void {
   models = value;
 }
 
@@ -51,7 +50,6 @@ export async function initialize(
   }
 
   createCanvas(canvasId);
-  createControls();
   createRenderer();
   createLighting();
 

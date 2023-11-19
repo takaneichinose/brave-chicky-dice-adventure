@@ -1,5 +1,4 @@
 import * as THREE from 'three';
-import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
 import * as CameraSettings from '../Constants/CameraSettings';
 import * as LightingSettings from '../Constants/LightingSettings';
@@ -17,7 +16,6 @@ export const camera: THREE.PerspectiveCamera = new THREE.PerspectiveCamera(
 export const clock: THREE.Clock = new THREE.Clock();
 
 export let canvas: HTMLCanvasElement;
-export let controls: OrbitControls;
 export let renderer: THREE.WebGLRenderer;
 
 /**
@@ -71,13 +69,6 @@ export function createRenderer(): void {
 }
 
 /**
- * Create the orbit controls
- */
-export function createControls(): void {
-  controls = new OrbitControls(camera, canvas);
-}
-
-/**
  * Create the canvas element
  * @param {string} canvasId ID attribute of the canvas element
  */
@@ -97,5 +88,9 @@ export function createCanvas(canvasId: string): void {
  * Initialize the position of the camera
  */
 export function initializeCamera(): void {
-  camera.position.z = CameraSettings.position.z;
+  const { x, y, z } = CameraSettings.position;
+
+  camera.position.x = x;
+  camera.position.y = y;
+  camera.position.z = z;
 }

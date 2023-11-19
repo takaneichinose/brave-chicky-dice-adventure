@@ -1,10 +1,9 @@
-import * as THREE from 'three';
-
 import {
   finishedEventName,
   progressEventName,
   startEventName,
 } from '../Constants/Events';
+import { ModelData } from '../Types/Models';
 
 import { emit } from './Events';
 import { setModels } from './Game';
@@ -15,7 +14,7 @@ import { loadModel } from './Models';
  * @param {Record<string,string>[]} assets List of assets
  */
 export async function preload(assets: Record<string, string>[]): Promise<void> {
-  const models: Record<string, THREE.Group> = {};
+  const models: Record<string, ModelData> = {};
 
   emit(startEventName, {
     count: assets.length,

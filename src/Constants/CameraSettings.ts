@@ -17,5 +17,7 @@ export const far = 1000;
  * Initial d position of the camera
  */
 export const position = {
-  z: 2.5,
+  x: 0,
+  y: 0.1,
+  z: 3,
 };
