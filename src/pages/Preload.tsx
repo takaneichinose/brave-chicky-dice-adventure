@@ -1,13 +1,15 @@
-import { Html, useProgress } from '@react-three/drei';
+import { useProgress } from '@react-three/drei';
+
+import CenterItems from '@/components/CenterItems';
+import Label from '@/components/Label';
 
 const Preload = () => {
   const { progress } = useProgress();
 
-  // TODO: Progress bar
   return (
-    <Html>
-      <div className="flex justify-center items-center">{progress}</div>
-    </Html>
+    <CenterItems className="text-pico-8 bg-pico-1 w-full h-full">
+      <Label>Loading... {Math.round(progress * 100) / 100}%</Label>
+    </CenterItems>
   );
 };
 

@@ -1,3 +1,36 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+  font-family: misaki;
+  src: url('/fonts/misaki_gothic.ttf');
+}
+
+@font-face {
+  font-family: misaki-2nd;
+  src: url('/fonts/misaki_gothic_2nd.ttf');
+}
+
+@font-face {
+  font-family: misaki-mincho;
+  src: url('/fonts/misaki_mincho.ttf');
+}
+
+@font-face {
+  font-family: silkscreen;
+  src: url('/fonts/Silkscreen-Regular.ttf');
+}
+
+@font-face {
+  font-family: silkscreen-bold;
+  font-weight: bold;
+  src: url('/fonts/Silkscreen-Bold.ttf');
+}
+
+body,
+button,
+input,
+select {
+  font-family: silkscreen, misaki, Courier, monospace;
+}

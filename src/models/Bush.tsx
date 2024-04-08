@@ -7,12 +7,12 @@ import { getModelPath } from '@/utils/asset';
 
 const model = getModelPath(ASSETS.bush);
 
-export interface IBushProps {
+export type BushProps = {
   position: Vector3;
   rotation: Euler;
-}
+};
 
-export const Bush = ({ position, rotation }: IBushProps) => {
+export const Bush = ({ position, rotation }: BushProps) => {
   return (
     <Gltf
       src={model}

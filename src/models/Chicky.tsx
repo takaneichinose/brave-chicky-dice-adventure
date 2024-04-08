@@ -13,9 +13,9 @@ export const Chicky = () => {
   const [action, setAction] = useState<string>(CHARACTER_ANIMATION.Idle);
   const [position, setPosition] = useState<Vector3>(CHICKY_SETTINGS.position);
 
-  const group = useRef<Group<Object3DEventMap>>(null);
+  const ref = useRef<Group<Object3DEventMap>>(null);
   const { animations, nodes } = useGLTF(model);
-  const { actions } = useAnimations(animations, group);
+  const { actions } = useAnimations(animations, ref);
 
   useEffect(() => {
     actions[action]?.play();
@@ -23,7 +23,7 @@ export const Chicky = () => {
 
   return (
     <group
-      ref={group}
+      ref={ref}
       dispose={null}
       position={position}
       rotation={CHICKY_SETTINGS.rotation}

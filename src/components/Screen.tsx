@@ -1,13 +1,13 @@
 import React from 'react';
 
-interface ScreenProps {
+import CenterItems from '@/components/CenterItems';
+
+type ScreenProps = {
   children?: React.ReactNode;
-}
+};
 
 const Screen = ({ children }: ScreenProps) => (
-  <div className="bg-black w-screen h-screen flex items-center justify-center">
-    {children}
-  </div>
+  <CenterItems className="bg-pico-1 w-screen h-screen">{children}</CenterItems>
 );
 
 export default Screen;

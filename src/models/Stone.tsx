@@ -7,12 +7,12 @@ import { getModelPath } from '@/utils/asset';
 
 const model = getModelPath(ASSETS.stone);
 
-export interface IStoneProps {
+export type StoneProps = {
   position: Vector3;
   rotation: Euler;
-}
+};
 
-export const Stone = ({ position, rotation }: IStoneProps) => {
+export const Stone = ({ position, rotation }: StoneProps) => {
   return (
     <Gltf
       src={model}

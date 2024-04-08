@@ -8,12 +8,12 @@ import { getModelPath } from '@/utils/asset';
 
 const model = getModelPath(ASSETS.tree);
 
-export interface ITreeProps {
+export type TreeProps = {
   position: Vector3;
   rotation: Euler;
-}
+};
 
-export const Tree = ({ position, rotation }: ITreeProps) => {
+export const Tree = ({ position, rotation }: TreeProps) => {
   return (
     <Gltf
       src={model}

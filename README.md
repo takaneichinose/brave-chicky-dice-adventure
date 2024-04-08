@@ -47,11 +47,13 @@ For my future reference, below is the way to build the program.
 1. [ThreeJS](https://threejs.org/) 3D Rendering engine used for the game
 1. [React](https://react.dev/) Front end web library for UI
 1. [React Three Fiber](https://docs.pmnd.rs/react-three-fiber) Integration of ThreeJS into React
+1. [TweenJS](https://tweenjs.github.io/tween.js/) Animation or tweening
 1. [TailwindCSS](https://tailwindcss.com/) CSS framework for easy styling
 1. [Vite](https://vitejs.dev/) Build tool for the web
 1. [TypeScript](https://www.typescriptlang.org/) Type safety JavaScript transpiler
 1. [NodeJS](https://nodejs.org/en/) Runtime JavaScript used for building the app
 1. [npm](https://www.npmjs.com/) Package manager for NodeJS
-1. [Nosutaru dot](https://free-fonts.jp/nosutaru-dot/) Pixel-art fonts
+1. [Silkscreen](https://fonts.google.com/specimen/Silkscreen) Pixel-art fonts
+1. [Misaki](https://littlelimit.net/misaki.htm) Pixel-art fonts
 1. [PICO-8 Secret Palette](https://lospec.com/palette-list/pico-8-secret-palette) All PICO-8 palettes and its hidden colours
 1. [Visual Studio Code](https://code.visualstudio.com/) Text editor (IDE) I used for development

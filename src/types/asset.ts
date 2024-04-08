@@ -1,27 +1,23 @@
 import { Euler, Vector3 } from 'three';
 
-export interface IAssetData {
-  name: string;
-  model: string;
-}
-
-export interface IAsset {
+export type AssetType = {
   bush: string;
   chicky: string;
+  dice: string;
   ghost: string;
   grass: string;
   stage: string;
   stone: string;
   tree: string;
   tree2: string;
-}
+};
 
-export interface ISettings {
+export type Position = {
   position: Vector3;
   rotation: Euler;
-}
+};
 
-export interface IMinMax {
+export type MinMax = {
   min: number;
   max: number;
-}
+};

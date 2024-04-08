@@ -3,8 +3,10 @@ import { Euler, Vector3 } from 'three';
 import { degToRad } from 'three/src/math/MathUtils.js';
 
 import { Camera } from '@react-three/fiber';
-import { IAnimation } from '@/utils/character';
-import { IMinMax, ISettings } from '@/types/asset';
+import { Animation } from '@/types/actor';
+import { MinMax, Position } from '@/types/asset';
+
+//#region ThreeJS Settings
 
 export const CAMERA = {
   near: 0.1,
@@ -18,27 +20,43 @@ export const DIRECTIONAL_COLOR = 0xffffff;
 
 export const DIRECTIONAL_LIGHT = new Vector3(-3, 4, 3);
 
-export const FOG_COLOR = 0xffffff;
+export const FOG_COLOR = 0x065ab5;
 
 export const FOG_NEAR = 3;
 
 export const FOG_FAR = 5;
 
-export const MODEL_GROUP_SETTINGS: ISettings = {
+//#endregion
+
+//#region Game Settings
+
+export const DEFAULT_PLAYER_HP = 50;
+
+export const DEFAULT_ENEMY_HP = 10;
+
+export const STARTING_FLOOR = 1;
+
+export const MODEL_GROUP_SETTINGS: Position = {
   position: new Vector3(0, -0.5, 0),
   rotation: new Euler(0, 0, 0),
 };
 
 export const STAGE_SCALE = new Vector3(4, 1, 4);
 
-// Trees
+export const DICE_MIN_VALUE = 1;
 
-export const TREES_X: IMinMax = {
+export const DICE_MAX_VALUE = 6;
+
+//#endregion
+
+//#region Trees
+
+export const TREES_X: MinMax = {
   min: -5,
   max: 5,
 };
 
-export const TREES_Z: IMinMax = {
+export const TREES_Z: MinMax = {
   min: -4.5,
   max: -0.75,
 };
@@ -47,63 +65,82 @@ export const TREE1_COUNT: number = 8;
 
 export const TREE2_COUNT: number = 8;
 
-// Bush
+//#endregion
 
-export const BUSH_X: IMinMax = {
+//#region Bush
+
+export const BUSH_X: MinMax = {
   min: -5,
   max: 5,
 };
 
-export const BUSH_Z: IMinMax = {
+export const BUSH_Z: MinMax = {
   min: -4.5,
   max: -0.75,
 };
 
 export const BUSH_COUNT: number = 4;
 
-// Grass
+//#endregion
 
-export const GRASS_X: IMinMax = {
-  min: -5,
-  max: 5,
-};
+//#region Grass
 
-export const GRASS_Z: IMinMax = {
+export const GRASS_X: MinMax = {
   min: -4.5,
-  max: 0.75,
+  max: 4.5,
 };
 
-export const GRASS_COUNT: number = 150;
+export const GRASS_Z: MinMax = {
+  min: -3.5,
+  max: 1.75,
+};
 
-// Stone
+export const GRASS_COUNT: number = 200;
 
-export const STONE_X: IMinMax = {
+//#endregion
+
+//#region Stone
+
+export const STONE_X: MinMax = {
   min: -5,
   max: 5,
 };
 
-export const STONE_Z: IMinMax = {
+export const STONE_Z: MinMax = {
   min: -4.5,
   max: -0.75,
 };
 
 export const STONE_COUNT: number = 4;
 
-// Actors
+//#endregion
 
-export const CHICKY_SETTINGS: ISettings = {
+//#region Dice
+
+export const DICE_SETTINGS: Position = {
+  position: new Vector3(0, 0, 0),
+  rotation: new Euler(0, 0, 0),
+};
+
+//#endregion
+
+//#region Actors
+
+export const CHICKY_SETTINGS: Position = {
   position: new Vector3(-1.25, 0, 0),
   rotation: new Euler(0, degToRad(90), 0),
 };
 
-export const GHOST_SETTINGS: ISettings = {
+export const GHOST_SETTINGS: Position = {
   position: new Vector3(1.25, 0, 0),
   rotation: new Euler(0, degToRad(-90), 0),
 };
 
-export const CHARACTER_ANIMATION: IAnimation = {
+export const CHARACTER_ANIMATION: Animation = {
   Attack: 'Attack',
   Guard: 'Guard',
   Idle: 'Idle',
   Walk: 'Walk',
 };
+
+//#endregion

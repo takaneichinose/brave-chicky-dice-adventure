@@ -1,11 +1,13 @@
 import React from 'react';
 
-interface SceneProps {
+type SceneProps = {
   children?: React.ReactNode;
-}
+};
 
 const Scene = ({ children }: SceneProps) => (
-  <div className="bg-white w-full max-h-screen aspect-video">{children}</div>
+  <div className="bg-pico-29 w-full max-h-screen relative aspect-video">
+    {children}
+  </div>
 );
 
 export default Scene;

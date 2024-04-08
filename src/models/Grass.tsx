@@ -7,12 +7,12 @@ import { getModelPath } from '@/utils/asset';
 
 const model = getModelPath(ASSETS.grass);
 
-export interface IGrassProps {
+export type GrassProps = {
   position: Vector3;
   rotation: Euler;
-}
+};
 
-export const Grass = ({ position, rotation }: IGrassProps) => {
+export const Grass = ({ position, rotation }: GrassProps) => {
   return (
     <Gltf
       src={model}

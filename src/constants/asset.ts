@@ -1,4 +1,4 @@
-import { IAsset } from '@/types/asset';
+import { AssetType } from '@/types/asset';
 
 export const PUBLIC_PATH = '';
 
@@ -6,9 +6,10 @@ export const MODELS_PATH = `${PUBLIC_PATH}/models`;
 
 export const MODEL_EXT = 'gltf';
 
-export const ASSETS: IAsset = {
+export const ASSETS: AssetType = {
   bush: 'bush',
   chicky: 'chicky',
+  dice: 'dice',
   ghost: 'ghost',
   grass: 'grass',
   stage: 'stage',
