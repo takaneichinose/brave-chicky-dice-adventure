@@ -1,25 +1,32 @@
+import { useRef, useState } from 'react';
+
 import { Group, Mesh, Object3DEventMap, Vector3 } from 'three';
 
-import { useAnimations, useGLTF } from '@react-three/drei';
+import { useGLTF } from '@react-three/drei';
 
 import { ASSETS } from '@/constants/asset';
-import { CHARACTER_ANIMATION, CHICKY_SETTINGS } from '@/constants/settings';
+import { CHICKY_SETTINGS } from '@/constants/settings';
+import { Command } from '@/enums/game';
+import { useActorAnimation } from '@/hooks/useActorAnimation';
 import { getModelPath } from '@/utils/asset';
-import { useEffect, useRef, useState } from 'react';
 
 const model = getModelPath(ASSETS.chicky);
 
-export const Chicky = () => {
-  const [action, setAction] = useState<string>(CHARACTER_ANIMATION.Idle);
+type ChickyProps = {
+  command?: Command;
+};
+
+export const Chicky = ({ command }: ChickyProps) => {
   const [position, setPosition] = useState<Vector3>(CHICKY_SETTINGS.position);
 
   const ref = useRef<Group<Object3DEventMap>>(null);
   const { animations, nodes } = useGLTF(model);
-  const { actions } = useAnimations(animations, ref);
 
-  useEffect(() => {
-    actions[action]?.play();
-  }, [actions, action]);
+  const onActionEnd = () => {
+    console.log('test');
+  };
+
+  useActorAnimation({ command, animations, ref, onActionEnd });
 
   return (
     <group

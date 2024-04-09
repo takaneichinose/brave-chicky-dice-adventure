@@ -1,4 +1,4 @@
-import { MODEL_EXT, MODELS_PATH } from '@/constants/asset.ts';
+import { MODEL_EXT, MODELS_PATH } from '@/constants/asset';
 
 /**
  * Get the full path of the model.

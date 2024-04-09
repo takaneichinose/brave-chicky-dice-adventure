@@ -1,10 +1,13 @@
 import DialogWindow from '@/components/DialogWindow';
 import Link from '@/components/Link';
+import { COMMAND_LIST } from '@/constants/settings';
+import { Command } from '@/enums/game';
+import { checkDisabledCommand, getCommandName } from '@/utils/game';
 
 type CommandWindowProps = {
   shown?: boolean;
   value?: number;
-  doCommand?: (command: string) => void;
+  doCommand?: (command: Command) => void;
 };
 
 const CommandWindow = ({
@@ -12,41 +15,32 @@ const CommandWindow = ({
   value,
   doCommand,
 }: CommandWindowProps) => {
-  const handleSkipClickEvent = () => {
+  const handleCommandClickEvent = (command: Command) => {
     if (doCommand != null) {
-      doCommand('Skip');
+      doCommand(command);
     }
   };
 
-  const handleDefendClickEvent = () => {
-    if (doCommand != null) {
-      doCommand('Defend');
-    }
-  };
-
-  const handleAttackClickEvent = () => {
-    if (doCommand != null) {
-      doCommand('Attack');
-    }
-  };
-
-  const handleHealClickEvent = () => {
-    if (doCommand != null) {
-      doCommand('Heal');
-    }
-  };
-
-  // TODO: Disabled by value
-  // value
   return (
     <DialogWindow
       shown={shown}
       className="w-1/2 sm:w-64 lg:w-80 flex-col space-y-2"
     >
-      <Link onClick={handleSkipClickEvent}>Skip</Link>
-      <Link onClick={handleDefendClickEvent}>Defend</Link>
-      <Link onClick={handleAttackClickEvent}>Attack</Link>
-      <Link onClick={handleHealClickEvent}>Heal</Link>
+      {COMMAND_LIST.map((command: Command) => {
+        const commandName = getCommandName(command);
+
+        return (
+          <Link
+            key={command}
+            onClick={() => handleCommandClickEvent(command)}
+            disabled={
+              value != null ? checkDisabledCommand(command, value) : true
+            }
+          >
+            {commandName}
+          </Link>
+        );
+      })}
     </DialogWindow>
   );
 };

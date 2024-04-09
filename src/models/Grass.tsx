@@ -7,7 +7,7 @@ import { getModelPath } from '@/utils/asset';
 
 const model = getModelPath(ASSETS.grass);
 
-export type GrassProps = {
+type GrassProps = {
   position: Vector3;
   rotation: Euler;
 };

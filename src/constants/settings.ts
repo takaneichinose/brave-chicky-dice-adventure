@@ -1,10 +1,11 @@
-import { Euler, Vector3 } from 'three';
+import { Euler, LoopOnce, LoopRepeat, Vector3 } from 'three';
 
 import { degToRad } from 'three/src/math/MathUtils.js';
 
 import { Camera } from '@react-three/fiber';
-import { Animation } from '@/types/actor';
+import { Animation, AnimationLoop } from '@/types/actor';
 import { MinMax, Position } from '@/types/asset';
+import { Command } from '@/enums/game';
 
 //#region ThreeJS Settings
 
@@ -46,6 +47,21 @@ export const STAGE_SCALE = new Vector3(4, 1, 4);
 export const DICE_MIN_VALUE = 1;
 
 export const DICE_MAX_VALUE = 6;
+
+export const COMMAND_LIST = [
+  Command.Skip,
+  Command.Defend,
+  Command.Attack,
+  Command.Heal,
+];
+
+export const ABLE_COMMAND = [
+  0, // None
+  0, // Skip
+  2, // Defend
+  3, // Attack
+  5, // Heal
+];
 
 //#endregion
 
@@ -122,6 +138,8 @@ export const DICE_SETTINGS: Position = {
   rotation: new Euler(0, 0, 0),
 };
 
+export const DICE_FADE_TIME = 500;
+
 //#endregion
 
 //#region Actors
@@ -141,6 +159,19 @@ export const CHARACTER_ANIMATION: Animation = {
   Guard: 'Guard',
   Idle: 'Idle',
   Walk: 'Walk',
+  Skip: 'Skip',
+  Jump: 'Jump',
+  Faint: 'Faint',
+};
+
+export const CHARACTER_ANIMATION_LOOP: AnimationLoop = {
+  Attack: LoopOnce,
+  Guard: LoopOnce,
+  Idle: LoopRepeat,
+  Walk: LoopRepeat,
+  Skip: LoopOnce,
+  Jump: LoopOnce,
+  Faint: LoopOnce,
 };
 
 //#endregion

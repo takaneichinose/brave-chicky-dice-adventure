@@ -32,6 +32,7 @@ import {
   DICE_MIN_VALUE,
   DICE_MAX_VALUE,
 } from '@/constants/settings';
+import { Command, CommandTurn } from '@/enums/game';
 import { useAddObjects } from '@/hooks/useAddObjects';
 import { Chicky } from '@/models/Chicky';
 import { Bush } from '@/models/Bush';
@@ -52,12 +53,21 @@ import Screen from '@/components/Screen';
 import Preload from '@/pages/Preload';
 
 const BraveChickyDiceAdventure = () => {
+  //#region useState
+
   const [playerHP, setPlayerHP] = useState<number>(DEFAULT_PLAYER_HP);
   const [enemyHP, setEnemyHP] = useState<number>(DEFAULT_ENEMY_HP);
   const [floor, setFloor] = useState<number>(STARTING_FLOOR);
   const [diceWindowShown, setDiceWindowShown] = useState<boolean>(true);
   const [diceValue, setDiceValue] = useState<number | undefined>();
   const [commandWindowShown, setCommandWindowShown] = useState<boolean>(false);
+  const [turn, setTurn] = useState<CommandTurn>(CommandTurn.Player);
+  const [chickyCommand, setChickyCommand] = useState<Command>();
+  const [ghostCommand, setGhostCommand] = useState<Command>();
+
+  //#endregion
+
+  //#region useAddObjects
 
   const tree1List: Array<Position> = useAddObjects({
     count: TREE1_COUNT,
@@ -85,6 +95,10 @@ const BraveChickyDiceAdventure = () => {
     objectZ: STONE_Z,
   });
 
+  //#endregion
+
+  //#region Methods
+
   const handleOnDiceRoll = () => {
     setDiceWindowShown(false);
 
@@ -97,9 +111,17 @@ const BraveChickyDiceAdventure = () => {
     setCommandWindowShown(true);
   };
 
-  const handleDoCommand = (command: string) => {
-    console.log(command);
+  const handleDoCommand = (command: Command) => {
+    if (turn === CommandTurn.Player) {
+      setChickyCommand(command);
+    } else if (turn === CommandTurn.Computer) {
+      setGhostCommand(command);
+    }
+
+    setCommandWindowShown(false);
   };
+
+  //#endregion
 
   return (
     <Screen>
@@ -151,8 +173,8 @@ const BraveChickyDiceAdventure = () => {
                 />
               ))}
               <Stage />
-              <Chicky />
-              <Ghost />
+              <Chicky command={chickyCommand} />
+              <Ghost command={ghostCommand} />
               <Dice value={diceValue} onRollEnd={handleDiceRollEndEvent} />
             </group>
             <fog attach="fog" color={FOG_COLOR} near={FOG_NEAR} far={FOG_FAR} />

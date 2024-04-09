@@ -7,7 +7,7 @@ import { getModelPath } from '@/utils/asset';
 
 const model = getModelPath(ASSETS.stone);
 
-export type StoneProps = {
+type StoneProps = {
   position: Vector3;
   rotation: Euler;
 };

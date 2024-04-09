@@ -1,29 +1,36 @@
-import { Group, Mesh, Object3DEventMap, Vector3 } from 'three';
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 
-import { useAnimations, useGLTF } from '@react-three/drei';
+import { Group, Mesh, Object3DEventMap, Vector3 } from 'three';
+
+import { useGLTF } from '@react-three/drei';
 
 import { ASSETS } from '@/constants/asset';
-import { CHARACTER_ANIMATION, GHOST_SETTINGS } from '@/constants/settings';
+import { GHOST_SETTINGS } from '@/constants/settings';
 import { getModelPath } from '@/utils/asset';
+import { Command } from '@/enums/game';
+import { useActorAnimation } from '@/hooks/useActorAnimation';
 
 const model = getModelPath(ASSETS.ghost);
 
-export const Ghost = () => {
-  const [action, setAction] = useState<string>(CHARACTER_ANIMATION.Idle);
+type GhostProps = {
+  command?: Command;
+};
+
+export const Ghost = ({ command }: GhostProps) => {
   const [position, setPosition] = useState<Vector3>(GHOST_SETTINGS.position);
 
-  const group = useRef<Group<Object3DEventMap>>(null);
+  const ref = useRef<Group<Object3DEventMap>>(null);
   const { animations, nodes } = useGLTF(model);
-  const { actions } = useAnimations(animations, group);
 
-  useEffect(() => {
-    actions[action]?.play();
-  }, [actions, action]);
+  const onActionEnd = () => {
+    console.log('test');
+  };
+
+  useActorAnimation({ command, animations, ref, onActionEnd });
 
   return (
     <group
-      ref={group}
+      ref={ref}
       dispose={null}
       position={position}
       rotation={GHOST_SETTINGS.rotation}

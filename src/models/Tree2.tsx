@@ -8,7 +8,7 @@ import { getModelPath } from '@/utils/asset';
 
 const model = getModelPath(ASSETS.tree2);
 
-export type Tree2Props = {
+type Tree2Props = {
   position: Vector3;
   rotation: Euler;
 };
