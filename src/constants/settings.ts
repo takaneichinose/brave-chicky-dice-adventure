@@ -44,7 +44,7 @@ export const directionalLightSettings: DirectionalLightSettings = {
 
 export const ambientLightSettings: AmbientLightSettings = {
   color: 0xffffff,
-  intensity: 0.75,
+  intensity: 0.5,
 };
 
 export const fogSettings: FogSettings = {
