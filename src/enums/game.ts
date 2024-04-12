@@ -1,17 +1,11 @@
-/**
- * Available commands
- */
-export enum Command {
-  Skip = 1,
-  Defend = 2,
-  Attack = 3,
-  Heal = 4,
+export enum CommandTurn {
+  Player,
+  Computer,
 }
 
-/**
- * Current turn
- */
-export enum CommandTurn {
-  Player = 1,
-  Computer = 2,
+export enum DiceCommand {
+  Skip,
+  Defend,
+  Attack,
+  Heal,
 }

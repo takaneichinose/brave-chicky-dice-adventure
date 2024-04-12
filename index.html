@@ -4,10 +4,26 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + React + TS</title>
+    <title>Brave Chicky Dice Adventure</title>
   </head>
   <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
+    <div class="bg-pico-1 w-screen h-screen center-element">
+      <div class="bg-pico-29 w-full max-h-screen relative aspect-video">
+        <div id="screen" class="size-full">
+          <canvas id="canvas"></canvas>
+          <div
+            id="fade"
+            class="bg-pico-1 size-full absolute-top-left opacity-0 duration-500"
+          ></div>
+        </div>
+        <div id="hud_window"></div>
+        <div
+          id="command_window"
+          class="size-full center-element absolute-top-left"
+        ></div>
+        <div id="preload_window"></div>
+      </div>
+    </div>
+    <script type="module" src="/src/main.ts"></script>
   </body>
 </html>

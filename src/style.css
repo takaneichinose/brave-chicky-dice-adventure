@@ -1,0 +1,65 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: misaki;
+  src: url('/fonts/misaki_gothic.ttf');
+}
+
+@font-face {
+  font-family: misaki-2nd;
+  src: url('/fonts/misaki_gothic_2nd.ttf');
+}
+
+@font-face {
+  font-family: misaki-mincho;
+  src: url('/fonts/misaki_mincho.ttf');
+}
+
+@font-face {
+  font-family: silkscreen;
+  src: url('/fonts/Silkscreen-Regular.ttf');
+}
+
+@font-face {
+  font-family: silkscreen-bold;
+  font-weight: bold;
+  src: url('/fonts/Silkscreen-Bold.ttf');
+}
+
+body,
+button,
+input,
+select {
+  font-family: silkscreen, misaki, Courier, monospace;
+}
+
+@layer components {
+  .center-element {
+    @apply flex justify-center items-center;
+  }
+
+  .absolute-top-left {
+    @apply absolute top-0 left-0;
+  }
+
+  .text-common {
+    @apply text-pico-8 md:text-2xl lg:text-3xl;
+  }
+
+  .p-common {
+    @apply p-4 md:p-6 lg:p-8;
+  }
+
+  .dialog-window {
+    @apply bg-pico-1 w-1/2 sm:w-72 lg:w-96 p-common space-y-2 lg:space-y-4;
+  }
+
+  .link {
+    @apply text-common text-left w-full block relative pl-4 md:pl-6 lg:pl-8
+      before:text-inherit before:absolute before:top-0 before:left-0
+      enabled:text-pico-8 enabled:hover:before:content-['>']
+      disabled:text-pico-6 disabled:cursor-not-allowed;
+  }
+}

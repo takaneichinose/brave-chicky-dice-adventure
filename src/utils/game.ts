@@ -1,32 +1,42 @@
-import { ABLE_COMMAND } from '@/constants/settings';
-import { Command } from '@/enums/game';
+import { chicky, chickyAnimation, chickySettings } from '@/actors/chicky';
+import { ghost, ghostAnimation, ghostSettings } from '@/actors/ghost';
+import { animations } from '@/constants/actors';
+import {
+  computerHpIterationPerFloor,
+  defaultComputerHp,
+  defaultPlayerHp,
+} from '@/constants/settings';
+import { setCommandTurn } from '@/controls';
+import { CommandTurn } from '@/enums/game';
+import { getFloor, setComputerHp, setPlayerHp } from '@/hud';
 
 /**
- * Get the name of the command by its enum
- * @param {Command} command Command
- * @returns {string}
+ * Initialize the position of the actors
  */
-export const getCommandName = (command: Command): string => {
-  if (command === Command.Skip) return 'Skip';
-  else if (command === Command.Defend) return 'Defend';
-  else if (command === Command.Attack) return 'Attack';
-  else if (command === Command.Heal) return 'Heal';
-  else return '';
-};
+export const initializePosition = (commandTurn: CommandTurn): void => {
+  if (chicky == null || ghost == null) {
+    return;
+  }
 
-/**
- * Check the value of the dice then disable the command if lower than the settings
- * @param {Command} command Command
- * @param {number} value Value of the dice
- * @returns {boolean}
- */
-export const checkDisabledCommand = (
-  command: Command,
-  value: number,
-): boolean => {
-  return (
-    (command === Command.Defend && value < ABLE_COMMAND[Command.Defend]) ||
-    (command === Command.Attack && value < ABLE_COMMAND[Command.Attack]) ||
-    (command === Command.Heal && value < ABLE_COMMAND[Command.Heal])
-  );
+  chicky.position.x = chickySettings.position.x;
+  chicky.position.y = chickySettings.position.y;
+  chicky.position.z = chickySettings.position.z;
+
+  ghost.position.x = ghostSettings.position.x;
+  ghost.position.y = ghostSettings.position.y;
+  ghost.position.z = ghostSettings.position.z;
+
+  chickyAnimation(animations.Idle);
+  ghostAnimation(animations.Idle);
+
+  if (commandTurn === CommandTurn.Player) {
+    setComputerHp(
+      defaultComputerHp + Math.floor(getFloor() / computerHpIterationPerFloor),
+    );
+  } else {
+    setPlayerHp(defaultPlayerHp);
+    setComputerHp(defaultComputerHp);
+  }
+
+  setCommandTurn(CommandTurn.Player);
 };
