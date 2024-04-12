@@ -1,86 +1,32 @@
 {
   "name": "brave-chicky-dice-adventure",
-  "version": "2022.07.15-05.25.39",
-  "license": "MIT",
-  "homepage": "https://codepen.io/takaneichinose/pen/dympyjN",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
   "scripts": {
-    "build": "gulp -f ./build/gulpfile.js --cwd ./ --continue",
-    "serve": "gulp serve -f ./build/gulpfile.js --cwd ./ --continue",
-    "task": "gulp -f ./build/gulpfile.js --cwd ./ --continue",
-    "tasks": "gulp --tasks-simple -f ./build/gulpfile.js --cwd ./ --continue"
-  },
-  "config": {
-    "srcDir": "src/",
-    "distDir": "dist/"
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "lint": "eslint . --ext ts --report-unused-disable-directives --max-warnings 0",
+    "format": "prettier . --write"
   },
   "devDependencies": {
-    "browser-sync": "^2.26.7",
-    "del": "^4.1.1",
-    "glob": "^7.1.4",
-    "gulp-inject-partials": "^1.0.5",
-    "gulp-rename": "^1.4.0",
-    "gulp": "^4.0.2",
-    "webpack-cli": "^3.2.3",
-    "webpack-dev-server": "^3.2.1",
-    "webpack": "^4.29.6",
-    "gulp-sass": "^4.0.2",
-    "node-sass": "^4.12.0",
-    "gulp-typescript": "^5.0.1",
-    "typescript": "^3.5.2"
+    "@eslint/js": "^9.0.0",
+    "@types/three": "^0.163.0",
+    "autoprefixer": "^10.4.19",
+    "eslint": "^8.57.0",
+    "postcss": "^8.4.38",
+    "prettier": "3.2.5",
+    "tailwindcss": "^3.4.3",
+    "typescript": "^5.4.4",
+    "typescript-eslint": "^7.6.0",
+    "vite": "^5.2.8"
   },
-  "browserslist": [
-    "last 5 version"
-  ],
-  "tasks": {
-    "partials": {
-      "order": 999,
-      "src": [
-        "**/*.template.html"
-      ],
-      "pipe": [
-        {
-          "require": "gulp-inject-partials",
-          "args": [
-            {
-              "removeTags": true,
-              "quiet": true,
-              "ignoreError": true
-            }
-          ]
-        }
-      ],
-      "rename": {
-        "find": ".template",
-        "replace": ""
-      },
-      "cleanup": [
-        "**/*.partial.html",
-        "**/*.template.html"
-      ]
-    },
-    "sass": {
-      "src": [
-        "**/*.sass",
-        "**/*.scss"
-      ],
-      "pipe": [
-        {
-          "require": "gulp-sass"
-        }
-      ],
-      "cleanup": true
-    },
-    "livescript": {
-      "src": [
-        "**/*.typescript",
-        "**/*.ts"
-      ],
-      "pipe": [
-        {
-          "require": "gulp-typescript"
-        }
-      ],
-      "cleanup": true
-    }
+  "dependencies": {
+    "@typescript-eslint/eslint-plugin": "^7.6.0",
+    "@typescript-eslint/parser": "^7.6.0",
+    "clsx": "^2.1.0",
+    "howler": "^2.2.4",
+    "three": "^0.163.0"
   }
 }
